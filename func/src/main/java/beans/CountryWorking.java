@@ -19,5 +19,5 @@ public interface CountryWorking {
 
     void saveCountryXML(List<Country> countries, String direct) throws IOException;
 
-    List<Tradition> getCountryTraditions(int countryId);
+    List<Tradition> getCountryTraditions(int countryId) throws SQLException;
 }

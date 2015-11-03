@@ -62,7 +62,7 @@ public class HolidayDaoImpl implements HolidayDao {
     }
 
     @Override
-    public List<Holiday> getHolidayList() throws SQLException {
+    public List<Holiday> getHolidayList() {
         Session session;
         List<Holiday> holidayList;
         session = HibernateUtil.getSessionFactory().openSession();

@@ -63,7 +63,7 @@ public class CountryBean implements CountryWorking {
     }
 
     @Override
-    public List getCountryTraditions(int countryId) {
+    public List getCountryTraditions(int countryId) throws SQLException {
 
         Country c = new CountryDaoImpl().getCountry(countryId);
         return (ArrayList)c.getTraditions();
