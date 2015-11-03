@@ -20,5 +20,5 @@ public interface TraditionDao {
 
     List<Integer> getTraditionsCountry(String countryName) throws SQLException;
 
-    void changeTradition(int traditionId, int countryId, int holidayId, String description);
+    void changeTradition(int traditionId, int countryId, int holidayId, String description) throws SQLException;
 }

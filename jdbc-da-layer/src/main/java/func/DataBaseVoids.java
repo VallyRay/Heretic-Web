@@ -10,17 +10,10 @@ public class DataBaseVoids {
 
     public static Connection con = null;
 
-    public static void startOracle() {
+    public static void startOracle() throws ClassNotFoundException, SQLException {
         Locale.setDefault(Locale.ENGLISH);
-        try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             con = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/XE", "kolobok", "miller");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Class not found... again");
-        } catch (SQLException e) {
-            System.out.println("SQL error while connect to jdbc or make request");
-            System.out.println(e.getMessage());
-        }
     }
 
     //region Select voids

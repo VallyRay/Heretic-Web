@@ -12,7 +12,6 @@ public class HibernateUtil {
             Locale.setDefault(Locale.ENGLISH);
             sessionFactory = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
-            System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
         }
     }

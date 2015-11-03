@@ -14,8 +14,7 @@ public class HibernateFactory implements DaoFactory {
     private static ResourceDao resourceDao = null;
     private static HibernateFactory instance = null;
 
-    public static synchronized HibernateFactory getInstance(){
-        System.out.println("start get");
+    public static synchronized HibernateFactory getInstance() {
         Locale.setDefault(new Locale("en", "US"));
         HibernateFactory localInstance = instance;
         if (localInstance == null) {
@@ -27,25 +26,9 @@ public class HibernateFactory implements DaoFactory {
             }
         }
         return localInstance;
-        /*
-        if (instance == null){
-            Locale.setDefault(new Locale("en", "US"));
-            System.out.println("Locale.setDefault(new Locale(\"en\", \"US\"));");
-            instance = new HibernateFactory();
-            System.out.println("instance = new HibernateFactory();");
-        }
-        System.out.println("return instance;");
-        return instance;
-        */
     }
 
-    public CountryDao getCountryDao(){
-        /*
-        if (countryDAO == null){
-            countryDAO = new CountryDaoImpl();
-        }
-        return countryDAO;
-        */
+    public CountryDao getCountryDao() {
         CountryDao localCountryDao = countryDAO;
         if (localCountryDao == null) {
             synchronized (CountryDao.class) {
@@ -58,14 +41,14 @@ public class HibernateFactory implements DaoFactory {
         return localCountryDao;
     }
 
-    public HolidayDao getHolidayDao(){
-        if (holidayDao == null){
+    public HolidayDao getHolidayDao() {
+        if (holidayDao == null) {
             holidayDao = new HolidayDaoImpl();
         }
         return holidayDao;
     }
 
-    public TraditionDao getTraditionDao(){
+    public TraditionDao getTraditionDao() {
         if (traditionDao == null) {
             traditionDao = new TraditionDaoImpl();
         }
@@ -73,22 +56,21 @@ public class HibernateFactory implements DaoFactory {
     }
 
 
-
-    public CommentsDao getCommentsDao(){
+    public CommentsDao getCommentsDao() {
         if (commentsDao == null) {
             commentsDao = new CommentDaoImpl();
         }
         return commentsDao;
     }
 
-    public UserDao getUserDao(){
+    public UserDao getUserDao() {
         if (userDao == null) {
             userDao = new UserDaoImpl();
         }
         return userDao;
     }
 
-    public ResourceDao getResourceDao(){
+    public ResourceDao getResourceDao() {
         if (resourceDao == null) {
             resourceDao = new ResourceDaoImpl();
         }

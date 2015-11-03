@@ -9,6 +9,7 @@ import org.hibernate.search.errors.EmptyQueryException;
 import org.hibernate.search.query.dsl.BooleanJunction;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import hdalayer.util.HibernateUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -31,25 +32,20 @@ public class Search {
 
     // If we added data without using hibernate we had to run this method
     // (cause hibernate indexes is not matching to db)
-    public static void doIndex() {
+    public static void doIndex() throws InterruptedException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         FullTextSession fullTextSession = org.hibernate.search.Search.getFullTextSession(session);
-        try {
-            fullTextSession.createIndexer().startAndWait();
-        } catch (InterruptedException e) {
-            System.out.print("Can't create or update an index");
-        }
+        fullTextSession.createIndexer().startAndWait();
     }
 
     /**
      * Search by one or two patterns
-     * @param pattern the query string
+     *
+     * @param pattern      the query string
      * @param boolOperator OR(true); AND(false)
      * @return Search results. Query for more than 2 patterns return NULL
      */
     public static List<Tradition> searchTradition(String pattern, boolean boolOperator) {
-        //TODO Move "doIndex" to site initialization and run it after launch
-        //doIndex();
         List<Tradition> result = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         FullTextSession fullTextSession = org.hibernate.search.Search.getFullTextSession(session);
@@ -63,7 +59,7 @@ public class Search {
 
             // Lucene makes all the search
             org.apache.lucene.search.Query luceneQuery;
-            if (boolOperator){
+            if (boolOperator) {
                 luceneQuery = getORQuery(builder, patterns);
             } else {
                 luceneQuery = getANDQuery(builder, patterns);
@@ -75,15 +71,14 @@ public class Search {
         //region Catches
         catch (HibernateException ex) {
             transaction.rollback();
-            System.err.println("An error occurred during execution a search operation:");
-            ex.printStackTrace();
-        } catch (ClassCastException cce){
+            return new ArrayList<Tradition>();
+
+        } catch (ClassCastException cce) {
             transaction.rollback();
-            System.err.println("Returned results are not a List<Tradition>");
-            cce.printStackTrace();
+            return new ArrayList<Tradition>();
+
         } catch (EmptyQueryException ex) {
             transaction.rollback();
-            System.err.println("Searching string was empty, nothing was found");
             return new ArrayList<Tradition>();
         }
         //endregion
@@ -96,7 +91,8 @@ public class Search {
 
     /**
      * Search by one pattern
-     * @param pattern the query string
+     *
+     * @param pattern      the query string
      * @param boolOperator by holiday(true); by country(false)
      * @return Search results. Query for more than 2 patterns return NULL
      */
@@ -113,7 +109,7 @@ public class Search {
 
             // Lucene makes all the search
             org.apache.lucene.search.Query luceneQuery;
-            if (boolOperator){
+            if (boolOperator) {
                 luceneQuery = getByNameQuery(builder, pattern);
             } else {
                 luceneQuery = getByCountryQuery(builder, pattern);
@@ -125,15 +121,12 @@ public class Search {
         //region Catches
         catch (HibernateException ex) {
             transaction.rollback();
-            System.err.println("An error occurred during execution a search operation:");
-            ex.printStackTrace();
-        } catch (ClassCastException cce){
+            return new ArrayList<Tradition>();
+        } catch (ClassCastException cce) {
             transaction.rollback();
-            System.err.println("Returned results are not a List<Tradition>");
-            cce.printStackTrace();
+            return new ArrayList<Tradition>();
         } catch (EmptyQueryException ex) {
             transaction.rollback();
-            System.err.println("Searching string was empty, nothing was found");
             return new ArrayList<Tradition>();
         }
         //endregion
@@ -153,14 +146,15 @@ public class Search {
         org.hibernate.Query hibernateQuery =
                 fullTextSession.createFullTextQuery(luceneQuery, Tradition.class);
 
-        result = (List<Tradition>)hibernateQuery.list();
+        result = (List<Tradition>) hibernateQuery.list();
         return result;
     }
 
     /**
      * Create a Lucene Query for search by two words using OR operator
+     *
      * @param patterns Splitted searching string
-     * @param builder QueryBuilder from
+     * @param builder  QueryBuilder from
      * @return Lucene Query
      */
     private static org.apache.lucene.search.Query getORQuery(QueryBuilder builder, String[] patterns) {
@@ -177,8 +171,9 @@ public class Search {
 
     /**
      * Create a Lucene Query for search by two words using AND operator
+     *
      * @param patterns Searching splitted string
-     * @param builder QueryBuilder from
+     * @param builder  QueryBuilder from
      * @return Lucene Query
      */
     private static org.apache.lucene.search.Query getANDQuery(QueryBuilder builder, String[] patterns) {
@@ -194,7 +189,8 @@ public class Search {
 
     /**
      * Create a Lucene Query for search by holiday name
-     * @param name Holiday name for searching
+     *
+     * @param name    Holiday name for searching
      * @param builder QueryBuilder from
      * @return Lucene Query
      */
@@ -209,6 +205,7 @@ public class Search {
 
     /**
      * Create a Lucene Query for search by country name
+     *
      * @param country Country name for searching
      * @param builder QueryBuilder from
      * @return Lucene Query
