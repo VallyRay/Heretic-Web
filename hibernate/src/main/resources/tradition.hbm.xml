@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="model.Tradition" table="TRADITION">
+        <id name = "id" column="id">
+            <generator class="sequence">
+                <param name="sequence">tradition_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="holiday" column="HOLIDAY_ID" class="model.Holiday" lazy="false" /> <!--lazy=false костыль, так
+         как по хорошему нужно оставлять прокси и при необходимости подгружать ее
+          http://stackoverflow.com/questions/27604322/how-to-override-lazy-loading-after-session-was-closed-->
+        <many-to-one name="country" column="COUNTRY_ID" class="model.Country" lazy="false" />
+        <property name="description" column="DESCRIPTION" type="java.lang.String"/>
+        <many-to-one name="user" class="model.User" column="USER_ID" lazy="false" />
+
+        <set name="comments" lazy="false" >
+            <key column="TRADITION_ID" />
+            <one-to-many class="model.Comment" />
+        </set>
+    </class>
+</hibernate-mapping>

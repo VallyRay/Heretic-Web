@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="model.Country" table="country">
+        <id name = "id" column="id">
+            <generator class="sequence">
+                <param name="sequence">country_seq</param>
+            </generator>
+        </id>
+
+        <property name="name" column="name" type="java.lang.String"/>
+        <set name="traditions" lazy="false" >
+            <key column="COUNTRY_ID" />
+            <one-to-many class="model.Tradition" />
+        </set>
+    </class>
+</hibernate-mapping>

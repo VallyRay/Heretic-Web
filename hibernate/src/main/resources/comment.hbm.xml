@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="model.Comment" table="COMMENTS">
+        <id name = "id" column="id"></id>
+
+        <property name="text" column="TEXT" type="java.lang.String"/>
+        <many-to-one name="tradition" column="TRADITION_ID" class="model.Tradition"/>
+        <many-to-one name="user" column="USER_ID" class="model.User"/>
+        <property name="date" column="CUR_DATE" type="java.util.Date"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>heretic</artifactId>
+        <groupId>com.netcraker.heretic</groupId>
+        <version>2.0.1.1</version>
+    </parent>
+
+    <artifactId>hibernate-da-layer</artifactId>
+    <version>2.0.1.1</version>
+
+    <name>Hibernate Access Layer</name>
+    <description>ORM Data Access Layer</description>
+
+    <dependencies>
+        <!-- Functional -->
+        <dependency>
+            <groupId>com.netcraker.heretic</groupId>
+            <artifactId>functional</artifactId>
+            <version>2.0.1.1</version>
+        </dependency>
+
+        <!-- Hibernate -->
+        <!-- Hibernate Core-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>4.2.2.Final</version>
+        </dependency>
+
+        <!-- Hibernate Search-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-search-engine</artifactId>
+            <version>4.4.4.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-search-orm</artifactId>
+            <version>4.4.4.Final</version>
+        </dependency>
+
+        <!-- Hibernate Commons Annotation-->
+        <dependency>
+            <groupId>org.hibernate.common</groupId>
+            <artifactId>hibernate-commons-annotations</artifactId>
+            <version>4.0.2.Final</version>
+        </dependency>
+
+        <!-- Hibernate JPA-->
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.0-api</artifactId>
+            <version>1.0.1.Final</version>
+        </dependency>
+
+        <!-- Lucene Search-->
+        <!-- Lucene Analyzers-->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-analyzers</artifactId>
+            <version>3.6.2</version>
+        </dependency>
+
+        <!-- Lucene Core-->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
+            <version>3.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-analyzers-common</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+
+        <!-- Does we need antlr, javassit, jbosslogging, jboss-trnsactions, dom4j dependecies in DA Layer? -->
+    </dependencies>
+</project>
