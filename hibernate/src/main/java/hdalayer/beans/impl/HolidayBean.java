@@ -1,7 +1,6 @@
 package hdalayer.beans.impl;
 
 import beans.HolidayWorking;
-import func.DateLabelFormatter;
 import func.FileWorking;
 import hdalayer.general.HibernateFactory;
 import model.Holiday;

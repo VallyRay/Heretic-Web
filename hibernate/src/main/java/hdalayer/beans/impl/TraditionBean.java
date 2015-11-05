@@ -1,7 +1,6 @@
 package hdalayer.beans.impl;
 
 import beans.TraditionWorking;
-import func.DateLabelFormatter;
 import func.FileWorking;
 import hdalayer.dao.impl.CountryDaoImpl;
 import hdalayer.dao.impl.HolidayDaoImpl;

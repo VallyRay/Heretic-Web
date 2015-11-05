@@ -1,7 +1,6 @@
 package hdalayer.beans.impl;
 
 import beans.UserWorking;
-import func.Calendar;
 import func.FileWorking;
 import hdalayer.general.HibernateFactory;
 import model.User;

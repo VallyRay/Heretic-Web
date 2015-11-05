@@ -1,6 +1,5 @@
 package model;
 
-import func.DateLabelFormatter;
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
