@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class ImportBean implements ImportWorking {
     private SAXBuilder builder = new SAXBuilder();
 
-//  /  private Boolean checkExist(int id, String tableName){
+//  //  private Boolean checkExist(int id, String tableName){
 //        DataBaseVoids.startOracle();
 //        try {
 //            PreparedStatement stmnt = DataBaseVoids.con.prepareStatement(
